@@ -1,0 +1,23 @@
+.search-wrapper {
+	display: inline-block;
+    width: 100%;
+    margin: 25px 0;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.search-wrapper .rty-input-holder {
+	padding: 0;
+}
+input.form-control,
+select.form-control {
+    border: 1px solid #a0a0a0 !important;
+}
+.btn {
+	margin: 15px;
+}
+.btn-search-book {
+	margin-left: 0;
+}
+table tr td .btn {
+	margin: 5px;
+}
