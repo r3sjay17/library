@@ -1,15 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<div class="main-panel">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><?php echo $header; ?></a>
-                </div>
-            </div>
-        </nav>
-
-
         <div class="content">
             <div class="container-fluid">
 

@@ -5,11 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Books_info extends CI_Model {
 
 	public function books( $title = null, $author = null, $genre = null, $section = null, $is_ajax = null ) {
-		//$this->db->select( 'book_info.id, book_info.title, book_info.author, book_info.genre, book_info.section, genre.genre as gr_genre, section.section as sc_section' );
+		$books = array();
 		$this->db->select( '*' );
 		$this->db->from( 'book_info' );
-		/*$this->db->join( 'genre', 'genre.id = book_info.genre', 'INNER' );
-		$this->db->join( 'section', 'section.id = book_info.section', 'INNER' );*/
 
 		if( $is_ajax == 1 ) {
 			if( !empty( $title ) ) {
@@ -29,31 +27,40 @@ class Books_info extends CI_Model {
 		$this->db->order_by( 'book_info.title', 'ASC' );
 		$qry = $this->db->get();
 		if( $qry->num_rows() > 0 ) {
-			$books = array();
 			foreach( $qry->result() as $row ) {
 				$gr_genre = $this->getRow( 'genre', 'genre', 'id', $row->genre );
 				$sc_section = $this->getRow( 'section', 'section', 'id', $row->section );
-				if( $this->checkBook( $row->id ) != $row->id ) {
-					$books[] = array( $row->id, $row->title, $row->author, $gr_genre, $sc_section, $row->genre, $row->section );
+				$copies = $this->checkBook( $row->id );
+				if( $copies > 0 ) {
+					$books[] = array( $row->id, $row->title, $row->author, $gr_genre, $sc_section, $row->genre, $row->section, $copies, $row->copies );
 				}
 			}
-			return $books;
-		} else {
-			return false;
 		}
+		return $books;
 	}
 
 	public function checkBook( $id ) {
-		$qry = $this->db->query( "SELECT borrowed.book as book_id FROM borrowed INNER JOIN book_info ON borrowed.book = book_info.id WHERE borrowed.status = 0 AND borrowed.book = " . $id );
+		$b_book = 0;
+		$c_book = 0;
+		$qry = $this->db->query( "SELECT COUNT(*) as books FROM borrowed INNER JOIN book_info ON borrowed.book = book_info.id WHERE borrowed.status = 0 AND borrowed.book = " . $id );
 		if( $qry->num_rows() > 0 ) {
-			$book = 0;
 			foreach( $qry->result() as $row ) {
-				$book = $row->book_id;
+				$b_book = $row->books;
 			}
-			return $book;
 		} else {
-			return 0;
+			$b_book = 0;
 		}
+
+		$qry2 = $this->db->query( "SELECT copies FROM book_info WHERE id = " . $id );
+		if( $qry2->num_rows() > 0 ) {
+			foreach( $qry2->result() as $row2 ) {
+				$c_book = $row2->copies;
+			}
+		} else {
+			$c_book = 0;
+		}
+
+		return ( $c_book - $b_book );
 	}
 
 	public function borrowed() {

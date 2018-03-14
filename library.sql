@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 06, 2018 at 03:37 PM
+-- Generation Time: Mar 14, 2018 at 06:43 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -35,17 +35,18 @@ CREATE TABLE IF NOT EXISTS `book_info` (
   `author` varchar(150) NOT NULL,
   `genre` int(11) NOT NULL,
   `section` int(11) NOT NULL,
+  `copies` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `book_info`
 --
 
-INSERT INTO `book_info` (`id`, `title`, `author`, `genre`, `section`) VALUES
-(1, 'Harry Potter', 'JK Rowling', 3, 3),
-(2, 'Insidous', 'N/A', 1, 1),
-(3, 'Mathe', 'Ma Tics', 2, 2);
+INSERT INTO `book_info` (`id`, `title`, `author`, `genre`, `section`, `copies`) VALUES
+(1, 'Harry Potter', 'JK Rowling', 3, 3, 3),
+(2, 'Insidous', 'N/A', 1, 1, 1),
+(3, 'Mathe', 'Ma Tics', 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `borrowed` (
   `date_returned` date NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `borrowed`
@@ -69,7 +70,8 @@ CREATE TABLE IF NOT EXISTS `borrowed` (
 
 INSERT INTO `borrowed` (`id`, `book`, `date_borrowed`, `date_returned`, `status`) VALUES
 (1, 1, '2018-02-26', '2018-03-06', 1),
-(2, 2, '2018-02-25', '0000-00-00', 0);
+(2, 2, '2018-02-25', '0000-00-00', 0),
+(4, 1, '2018-03-14', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 

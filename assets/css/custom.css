@@ -21,3 +21,6 @@ select.form-control {
 table tr td .btn {
 	margin: 5px;
 }
+.sidebar-wrapper .nav .divider {
+	display: none;
+}

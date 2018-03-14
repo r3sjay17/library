@@ -43,8 +43,9 @@ class Main_info extends CI_Controller {
 						$output .= '<td>'.$book[2].'</td>';
 						$output .= '<td>'.$book[3].'</td>';
 						$output .= '<td>'.$book[4].'</td>';
+						$output .= '<td>'.$book[7].'</td>';
 						$output .= '<td>';
-							$output .= '<a href="#" class="btn btn-edit-book" data-book="'.$book[0].','.$book[1].','.$book[2].','.$book[5].','.$book[6].'"><i class="fa fa-pencil-square-o"></i></a>';
+							$output .= '<a href="#" class="btn btn-edit-book" data-book="'.$book[0].','.$book[1].','.$book[2].','.$book[5].','.$book[6].','.$book[8].'"><i class="fa fa-pencil-square-o"></i></a>';
 							$output .= '<a href="#" class="btn btn-delete-book" data-book="book_info,id,'.$book[0].'"><i class="fa fa-trash-o"></i></a>';
 						$output .= '</td>';
 					$output .= '</tr>';
@@ -52,11 +53,7 @@ class Main_info extends CI_Controller {
 			$status = TRUE;
 		} else {
 			$output .= '<tr>';
-				$output .= '<td></td>';
-				$output .= '<td></td>';
-				$output .= '<td></td>';
-				$output .= '<td></td>';
-				$output .= '<td></td>';
+				$output .= '<td colspan="6">No results found!</td>';
 			$output .= '</tr>';
 			$status = FALSE;
 		}
@@ -133,7 +130,7 @@ class Main_info extends CI_Controller {
 		if( !empty( $borroweds ) ) {
 			foreach( $borroweds as $borrowed ) {
 				$x++;
-				$status = ( $borrowed[4] == 0 ) ? "---" : "Returned";
+				$status = ( $borrowed[4] == 0 ) ? "Borrowed" : "Returned";
 				$dt_borrowed = ( $borrowed[2] == "0000-00-00" ) ? "---" : date( 'M j, Y', strtotime( $borrowed[2] ) );
 				$dt_returned = ( $borrowed[3] == "0000-00-00" ) ? "---" : date( 'M j, Y', strtotime( $borrowed[3] ) );
 				$output .= '<tr>';
@@ -227,13 +224,15 @@ class Main_info extends CI_Controller {
 		$author = $_POST['bk_author'];
 		$genre = $_POST['bk_genre'];
 		$section = $_POST['bk_section'];
+		$copies = $_POST['bk_copies'];
 		$is_ajax = $_POST['is_ajax'];
 
 		$data = array(
 			'title' => $title,
 			'author' => $author,
 			'genre' => $genre,
-			'section' => $section
+			'section' => $section,
+			'copies' => $copies
 		);
 		if( $is_ajax == 1 ) {
 			$this->load->model( 'books_info' );
@@ -250,6 +249,7 @@ class Main_info extends CI_Controller {
 				$response['results'] = $this->books();
 			} else {
 				$output = '<tr>';
+					$output .= '<td></td>';
 					$output .= '<td></td>';
 					$output .= '<td></td>';
 					$output .= '<td></td>';

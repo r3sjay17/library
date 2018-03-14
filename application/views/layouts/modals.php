@@ -59,6 +59,10 @@
                                     ?>
                                 </select>
                             </div>
+                            <div class="rty-form-group">
+                                <label>Copies</label>
+                                <input type="number" id="bk_copies" name="bk_copies" class="form-control">
+                            </div>
                         </div>
                         <div class="form-actions">
                             <div class="row">

@@ -25,4 +25,7 @@
         var siteurl = "<?php echo site_url(); ?>";
     </script>
 
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+    <script src="<?php print base_url();?>assets/js/paper-dashboard.js"></script>
+
 </html>

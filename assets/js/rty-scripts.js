@@ -65,6 +65,7 @@ jQuery(function($) {
 		$('#rty_add_book_form #bk_author').val( info[2] );
 		$('#rty_add_book_form #bk_genre').val( parseInt( info[3] ) );
 		$('#rty_add_book_form #bk_section').val( parseInt( info[4] ) );
+		$('#rty_add_book_form #bk_copies').val( parseInt( info[5] ) );
 		$('#add_book .alert-success').html( "<i class='fa fa-check-square-o' aria-hidden='true'></i> Book info updated succesfully.<button class='close' data-close='alert'></button>" );
 		$('#add_book .alert-danger').html( "<i class='fa fa-check-square-o' aria-hidden='true'></i> Error updating book info!.<button class='close' data-close='alert'></button>" );
 		$('#add_book .modal-header .modal-title').html( '<strong><i class="fa fa-pencil"></i> Edit Book Information</strong>' );
@@ -393,6 +394,8 @@ jQuery(function($) {
 					$('.rty-table-books table tbody').html( data.results );
 					$('#rty_search_form .btn-search-book').html( '<i class="fa fa-search"></i> Search' );
 				} else {
+					$('.rty-table-books table tbody').html('');
+					$('.rty-table-books table tbody').html( data.results );
 					$('#rty_search_form .btn-search-book').html( '<i class="fa fa-search"></i> Search' );
 				}
 			}
